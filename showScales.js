@@ -4,7 +4,7 @@ $(document).ready(function(){ go(); });
 var tuning4ths = [28, 23, 18, 13, 8, 3];
 var tuningStandard = [28, 23, 19, 14, 9, 4];
 
-var stringOffsets = tuningStandard;
+var stringOffsets = tuning4ths;
 var majorScale = [0, 2, 4, 5, 7, 9, 11];
 
 var scales = [
@@ -14,7 +14,8 @@ var scales = [
 	['Melodic Minor', [0, 2, 3, 5, 7, 9, 11]],
 	['Lydian ♭7', [0, 2, 4, 6, 7, 9, 10]],
 	['Locrian ♮2', [0, 2, 3, 5, 6, 8, 10]],
-	['Altered', [0, 1, 3, 4, 6, 8, 10]]
+	['Altered', [0, 1, 3, 4, 6, 8, 10]],
+	['1-2-3-5', [0, 2, 4, 7]]
 ];
 
 var patternScaleUp = [1];
@@ -62,7 +63,9 @@ var synth = new Tone.Synth({
 var setMinFret = function(val) {
 	minFret = val;
 	minNote = minFret + stringOffsets[5];
-	maxNote = minNote + 5*5 + 4
+	// max note depends on the tuning
+	var range = stringOffsets[0] - stringOffsets[5] + 4;
+	maxNote = minNote + range
 };
 
 var sleep = function(ms) {
@@ -123,13 +126,17 @@ var buildUI = function(diagram){
 	
 	diagram.append(getRootSelector);
 	
-	formNotesPerMinute = getFormElement('Notes per minute', 'notesPerMinute', 3, 60);
+	formNotesPerMinute = getFormElement('Notes per minute', 'notesPerMinute', 3, 100);
 	diagram.append(formNotesPerMinute.domDiv);
 	
 	// add selector of minimum fret
 	var minFretSelect = $('<select/>');
 	for (var i=1; i < 12; i++){
-		minFretSelect.append($('<option/>').val(i).text(i));
+		var option = $('<option/>').val(i).text(i);
+		if (i == 4) {
+			option.prop('selected', true);
+		}
+		minFretSelect.append(option);
 	}
 	minFretSelect.change(function(){
 		setMinFret(parseInt(minFretSelect.val()));
@@ -140,7 +147,8 @@ var buildUI = function(diagram){
 	// add scale selector
 	var scaleSelector = $('<select/>');
 	$.each(scales, function(i, scale){
-		scaleSelector.append($('<option/>').val(i).text(scale[0]));
+		var option = $('<option/>').val(i).text(scale[0]);
+		scaleSelector.append(option);
 	});
 	// change scale values when a new entry is selected
 	scaleSelector.change(function(){
@@ -370,7 +378,7 @@ var selectActiveFrets = function(){
 	$('.fret').removeClass('activeFret');
 	// width of 5 does overlap, but it solves issues with 
 	// certain cases that otherwise would have 2 notes per string	
-	var width = 5;
+	var width = 4;
 	for (var i = minFret; i <= minFret + width; i++){
 		$('.fret' + i).addClass('activeFret');
 	}
