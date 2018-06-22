@@ -4,7 +4,7 @@ $(document).ready(function(){ go(); });
 var tuning4ths = [28, 23, 18, 13, 8, 3];
 var tuningStandard = [28, 23, 19, 14, 9, 4];
 
-var stringOffsets = tuning4ths;
+var stringOffsets = tuningStandard;
 var majorScale = [0, 2, 4, 5, 7, 9, 11];
 
 var scales = [
