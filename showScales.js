@@ -4,7 +4,7 @@ $(document).ready(function(){ go(); });
 var tuning4ths = [28, 23, 18, 13, 8, 3];
 var tuningStandard = [28, 23, 19, 14, 9, 4];
 
-var stringOffsets = tuning4ths;
+var stringOffsets = tuningStandard;
 var majorScale = [0, 2, 4, 5, 7, 9, 11];
 
 var scales = [
@@ -12,7 +12,7 @@ var scales = [
 	['Lydian', [0, 2, 4, 6, 7, 9, 11]],
 	['Mixolydian', [0, 2, 4, 5, 7, 9, 10]],
 	['Melodic Minor', [0, 2, 3, 5, 7, 9, 11]],
-	['Lydian ♭7', [0, 2, 4, 6, 7, 9, 10]],
+	['Lydian b7', [0, 2, 4, 6, 7, 9, 10]],
 	['Locrian ♮2', [0, 2, 3, 5, 6, 8, 10]],
 	['Altered', [0, 1, 3, 4, 6, 8, 10]],
 	['1-2-3-5', [0, 2, 4, 7]]
@@ -27,8 +27,8 @@ var availableRoots = [];
 var basicScale = scales[0][1];
 
 var noteNames = [
-	['C', 'D♭', 'D', 'E♭', 'E', 'F', 'G♭', 'G', 'A♭', 'A', 'B♭', 'B'],
-	['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B']
+	['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'],
+	['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 	];
 	
 var minFret = 4;
@@ -126,7 +126,7 @@ var buildUI = function(diagram){
 	
 	diagram.append(getRootSelector);
 	
-	formNotesPerMinute = getFormElement('Notes per minute', 'notesPerMinute', 3, 100);
+	formNotesPerMinute = getFormElement('Notes per minute', 'notesPerMinute', 3, 60);
 	diagram.append(formNotesPerMinute.domDiv);
 	
 	// add selector of minimum fret
@@ -300,7 +300,7 @@ async function showNotes(patternUp, patternDown){
 	
 	var i = 0;
 	while (true) {
-		$('#current').html("Current: " + currentScale.rootName);
+		$('#current').html('<span class="note">Current: ' + currentScale.rootName + '</span>');
 		$('#next').html("Next: " + nextScale.rootName);
 		$('#counter').html("Counter: " + (1 + i % transposeEveryHowManyNotes) + "/" + transposeEveryHowManyNotes);
 		
