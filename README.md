@@ -9,6 +9,7 @@ The application plays ascending and descending lines, changing scale root every 
 ## Features
 - plays the sounds straight from the browser
 - can change the fretboard position
+- can select what roots should be used
 - shows the scale and current root
 - displays the name next root
 - variable speed
