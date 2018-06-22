@@ -370,7 +370,7 @@ var selectActiveFrets = function(){
 	$('.fret').removeClass('activeFret');
 	// width of 5 does overlap, but it solves issues with 
 	// certain cases that otherwise would have 2 notes per string	
-	var width = 4;
+	var width = 5;
 	for (var i = minFret; i <= minFret + width; i++){
 		$('.fret' + i).addClass('activeFret');
 	}
