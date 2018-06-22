@@ -1,0 +1,44 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Show Scales</title>
+
+<style type="text/css">
+
+*, td { font-family: arial; text-align: center; }
+
+body { background-color: #444; color: #eee; }
+
+button.startPause { text-align: left; }
+
+#fretboard { border-collapse: collapse; }
+#fretboard td { border: 1px solid #999; width: 30px; height: 30px; font-size: 15px; }
+#fretboard td.fret0 { background-color: #555; width: 8px; }
+#fretboard td.fretName { border: 0px; font-size: 14px; background-color: #333;}
+#fretboard td.activeFret { border: 2px solid #000;}
+#fretboard td.noteScale.activeFret { background-color: #575; }
+#fretboard td.activeFret.hl { background-color: #e00; }
+
+
+#scaleSelector, #counter, #next, #current { font-size: 40px; margin: 0.1em; padding: 0.1em; height: 50px;}
+
+div { text-align: left; padding: 5px; }
+
+div.formField span, button {font-size: 14px; margin: 5px; }
+
+</style>
+
+<script src="./jquery.js" type="text/javascript"></script>
+<script src="./tone.js" type="text/javascript"></script>
+<script src="./showScales.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="next"></div>
+<div id="diagram"></div>
+<div id="current"></div>
+<div id="counter"></div>
+<div id="scaleSelector"></div>
+<div>Show Scale: <input type="checkbox" id="showScale" checked/></div>
+<div><span id="minFret"/> Minimum Fret: </div>
+</body>
+</html>
